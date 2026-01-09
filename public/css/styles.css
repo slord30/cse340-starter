@@ -4,3 +4,28 @@
 *:after {
   box-sizing: border-box;
 }
+
+:root {
+  --logo-font: "Gugi", sans-serif;
+  --main-font: "Raleway", sans-serif;
+
+  --accent: #FD151B;
+  --main: #000;
+}
+
+body {
+  background-image: url("/images/site/checkerboard.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+div#wrapper {
+  background-color: #fff;
+}
+
+/***************HEADER****************/
+a {
+  text-decoration: none;
+  font-family: var(--logo-font);
+}
