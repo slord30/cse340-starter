@@ -31,7 +31,7 @@ div#wrapper {
 a {
   text-decoration: none;
   font-family: var(--logo-font);
-  color: #000;
+  color: #fff;
 }
 
 span.siteName {

@@ -1,0 +1,17 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- Message Block -->
+<!-- Best practice to include message block just in case we need it later. For now it is commented out-->
+<%# messages() %>
+
+<!-- The Inventory Items Display -->
+<!-- Displays the grid (containing HTML) and logic we did previously in M-V-C -->
+<%- grid %>
+
+
+
