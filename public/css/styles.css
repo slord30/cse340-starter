@@ -57,6 +57,10 @@ nav ul {
   margin-top: 2rem;
 }
 
+
+
+
+
 /*****************MAIN BODY*****************/
 main {
   font-family: var(--main-font);
@@ -122,8 +126,8 @@ button {
   margin-top: 2rem;
 }
 
-ul li {
-  margin-bottom: 0.25rem;
+.reviews ul li {
+  margin-bottom: 0.5rem;
 }
 
 section.reviews {
@@ -133,7 +137,6 @@ section.reviews {
 }
 
 section.reviews ul {
-  margin: 0;
   padding-left: 1.2rem;
 }
 
@@ -169,6 +172,38 @@ section.reviews ul {
 /***************FOOTER*******************/
 footer {
   font-family: var(--main-font);
+}
+
+/**************** PAGE VIEW GRID ***************/
+ul#inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    list-style: none;
+}
+
+#inv-display li {
+  border: solid 1px #000;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+#inv-display img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+hr {
+  border: 0;
+}
+
+#inv-display a {
+  color: #000;
+}
+
+#inv-display a:hover {
+  color: var(--accent);
 }
 
 
