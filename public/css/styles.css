@@ -28,10 +28,17 @@ div#wrapper {
   padding: 0.25rem 0.25rem;
 }
 
+.siteName a {
+  color: #000;
+}
+
+#tools a {
+  color: #000;
+}
+
 a {
   text-decoration: none;
   font-family: var(--logo-font);
-  color: #fff;
 }
 
 span.siteName {
@@ -55,6 +62,14 @@ nav ul {
   color: hsl(0, 0%, 100%);
   padding: 1rem;
   margin-top: 2rem;
+}
+
+nav ul li a {
+  color: #fff;
+}
+
+nav ul li a:hover {
+  color: var(--accent);
 }
 
 
