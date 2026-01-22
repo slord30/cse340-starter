@@ -39,6 +39,7 @@ div#wrapper {
 a {
   text-decoration: none;
   font-family: var(--logo-font);
+  color: #000;
 }
 
 span.siteName {
@@ -71,8 +72,6 @@ nav ul li a {
 nav ul li a:hover {
   color: var(--accent);
 }
-
-
 
 
 
@@ -184,6 +183,7 @@ section.reviews ul {
   background-color: var(--accent);
 }
 
+
 /***************FOOTER*******************/
 footer {
   font-family: var(--main-font);
@@ -267,7 +267,7 @@ hr {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: auto auto;
-    column-gap: 1rem;
+    column-gap: 2rem;
     align-items: start;
   }
 
