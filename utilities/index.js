@@ -57,6 +57,36 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the inventory details single page view HTML
+* ************************************ */
+Util.buildInventoryDetail = async function(data){
+  if (!data || data.length===0) {
+    return '<p class ="warning">Sorry, no vehicle information available.</p>'
+  }
+  
+  const vehicle = data[0]
+
+  //Price formatiing
+  const price = new Intl.NumberFormat('en-US').format(vehicle.inv_price)
+
+  let details = `
+    <div class="vehicle-details">
+      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+      <div class="vehicle-info">
+        <h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>
+        <p><strong>Price:</strong> ${price}</p>
+        <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color}</p>
+        <p><strong>Miles:</strong> ${vehicle.inv_miles.toLocaleString()}</p>
+        </div>
+    </div>
+  `
+
+  return details
+}
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
