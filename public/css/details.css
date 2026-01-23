@@ -1,0 +1,25 @@
+.vehicle-details img {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+}
+
+.vehicle-info h2 {
+    border-bottom: solid 1px grey;
+}
+
+/****************LARGER SCREENS******************/
+@media (min-width: 600px) {
+
+    .vehicle-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2rem;
+        align-items: center;
+    }
+
+    .vehicle-details img {
+        display: block;
+        margin: 0 auto;
+    }
+}
