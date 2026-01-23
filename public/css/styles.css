@@ -191,10 +191,11 @@ footer {
 
 /**************** PAGE VIEW GRID ***************/
 ul#inv-display {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
-    list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px;
+  list-style: none;
 }
 
 #inv-display li {
@@ -227,9 +228,14 @@ footer {
   border-top: solid 2px #000;
 }
 
-
-
-
+/****************MEDIUM SCREENS******************/
+@media (min-width: 600px) {
+  ul#inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
 
 /****************LARGER SCREENS******************/
 
@@ -287,4 +293,5 @@ footer {
     grid-row: 1 / 2;
     margin: 0;
   }
+
 }
