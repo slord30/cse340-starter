@@ -1,0 +1,91 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --logo-font: "Gugi", sans-serif;
+  --main-font: "Raleway", sans-serif;
+
+  --accent: #FD151B;
+  --main: #000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem 0 1rem;
+    min-height: 400px;
+    justify-content: center;
+    margin: 1rem;
+}
+
+#form {
+    background-color: #cccccc;
+    width: 100%;
+    max-width: 400px;
+}
+
+button {
+    margin-top: 1rem;
+    font-family: var(--main-font);
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+label {
+    margin-top: 1rem;
+}
+
+input {
+    padding: 1rem;
+}
+
+button {
+    padding: 1rem;
+}
+
+p#regaccount {
+    text-align: center;
+}
+
+#noaccount a:hover {
+    color: var(--accent);
+}
+
+div#passwordBtn {
+    background-color: #cccccc;
+    max-width: 175px;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 5px;
+    border: solid 2px #000;
+}
+
+div#passwordBtn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+/****************LARGER SCREENS******************/
+@media (min-width: 450px) {
+    #form {
+        display: block;
+        margin: 0 auto;
+        width: 400px;
+    }
+}
