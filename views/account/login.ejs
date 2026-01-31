@@ -8,11 +8,19 @@
 <!--- FLASH MESSAGE ---->
 <%- messages() %>
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <!--- FORM ---->
 <div id="form">
-  <form method="post" action="/account/login">
+  <form id="loginForm" method="post" action="/account/login">
     <label for="email">Email Address:</label>
-    <input type="email" id="email" name="account_email" required value>
+    <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
     <label for="password">Password:</label>
     <input type="password" id="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
     <div>

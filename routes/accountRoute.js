@@ -4,12 +4,13 @@ const router = new express.Router()
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities")
 const regValidate = require('../utilities/account-validation')
+const loginValidate = require('../utilities/login-validation')
 
 // Route to Login View
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
 // Route to Account Login View
-router.post("/login", utilities.handleErrors(accountController.accountLogin))
+// router.post("/login", utilities.handleErrors(accountController.accountLogin))
 
 // Route to Registration View
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
@@ -20,6 +21,14 @@ router.post(
   regValidate.registrationRules(),
   regValidate.checkRegData,
   utilities.handleErrors(accountController.registerAccount)
+)
+
+// Process the login attempt
+router.post(
+  "/login",
+  loginValidate.loginRules(),
+  loginValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
 )
 
 

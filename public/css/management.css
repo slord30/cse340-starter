@@ -1,0 +1,42 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --logo-font: "Gugi", sans-serif;
+  --main-font: "Raleway", sans-serif;
+
+  --accent: #FD151B;
+  --main: #000;
+}
+
+ul#management {
+    margin-top: 2rem;
+}
+
+#management li a {
+    display: block;
+    padding: 4rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#management li {
+    margin-top: 20px;
+    list-style: none;
+    border: solid 2px #8b8b8b;
+    background-color: #cccccc;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+#management li:hover {
+    transform: scale(1.1);
+}
+
+#management a:hover {
+    color: var(--accent);
+}

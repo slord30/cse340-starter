@@ -1,7 +1,7 @@
 const utilities = require(".")
-  const { body, validationResult } = require("express-validator")
-  const validate = {}
+const { body, validationResult } = require("express-validator")
 const accountModel = require("../models/account-model")
+const validate = {}
 
 /*  **********************************
   *  Registration Data Validation Rules
@@ -12,7 +12,6 @@ const accountModel = require("../models/account-model")
       body("account_firstname")
         .trim()
         .escape()
-        .notEmpty()
         .isLength({ min: 1 })
         .withMessage("Please provide a first name."), // on error this message is sent.
   
@@ -20,8 +19,9 @@ const accountModel = require("../models/account-model")
       body("account_lastname")
         .trim()
         .escape()
-        .notEmpty()
         .isLength({ min: 2 })
+        .withMessage("Last name must be at least 2 characters long.")
+        .notEmpty()
         .withMessage("Please provide a last name."), // on error this message is sent.
   
       // valid email is required and cannot already exist in the database
@@ -41,7 +41,6 @@ const accountModel = require("../models/account-model")
       // password is required and must be strong password
       body("account_password")
         .trim()
-        .notEmpty()
         .isStrongPassword({
           minLength: 12,
           minLowercase: 1,
