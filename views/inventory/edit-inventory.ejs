@@ -21,11 +21,11 @@
 <!-- INVENTORY FORM -->
 <p><strong>All fields are required.</strong></p>
 <div>
-  <form id="addInventory" method="post" action="/inv/add-inventory">
+  <form id="editInventory" method="post" action="/inv/edit-inventory">
 
     <!-- Classification -->
     <label for="classificationList">Classification:</label>
-    <%- classificationList %>
+    <%- classificationSelect %>
 
     <!-- Make -->
     <label for="make">Make:</label>
@@ -76,6 +76,12 @@
     <input type="text" id="color" name="inv_color" required pattern="[A-Za-z\s]+"
       value="<%= locals.inv_color %>">
 
-    <button type="submit">Add New Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
   </form>
 </div>
+
+<script src="/js/inv-update.js"></script>

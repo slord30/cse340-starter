@@ -1,7 +1,7 @@
-const utilities = require(".")
-const { body, validationResult } = require("express-validator")
+const utilities = require(".");
+const { body, validationResult } = require("express-validator");
 
-const validate = {}
+const validate = {};
 
 /* **********************************
  * Assignment 4
@@ -13,29 +13,24 @@ validate.inventoryRules = () => {
       .notEmpty()
       .withMessage("Please choose a classification."),
 
-    body("inv_make")
+    body("inv_model")
       .trim()
       .notEmpty()
-      .withMessage("Make is required.")
-      .isAlpha('en-US', {ignore: ''})
-      .withMessage("Make can only contain letters."),
+      .withMessage("Model is required.")
+      .matches(/^[A-Za-z0-9\s\-]+$/),
 
     body("inv_model")
       .trim()
       .notEmpty()
       .withMessage("Make is required.")
-      .isAlpha('en-US', {ignore: ''})
-      .withMessage("Make can only contain letters."),
+      .matches(/^[A-Za-z0-9\s\-]+$/),
 
     body("inv_description")
       .trim()
       .notEmpty()
       .withMessage("Description is required."),
 
-    body("inv_image")
-      .trim()
-      .notEmpty()
-      .withMessage("Image path is required."),
+    body("inv_image").trim().notEmpty().withMessage("Image path is required."),
 
     body("inv_thumbnail")
       .trim()
@@ -54,39 +49,70 @@ validate.inventoryRules = () => {
       .isInt({ min: 0 })
       .withMessage("Miles must be a positive number."),
 
-    body("inv_color")
-      .trim()
-      .notEmpty()
-      .withMessage("Color is required.")
-  ]
-}
+    body("inv_color").trim().notEmpty().withMessage("Color is required."),
+  ];
+};
 
-
-  /* ******************************
+/* ******************************
  * Assignment 4
- * Check data and return errors 
+ * Check data and return errors
  * ***************************** */
 validate.checkInventoryData = async (req, res, next) => {
-    let errors = validationResult(req)
+  let errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-        let nav = await utilities.getNav()
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
 
-        let classificationList = await utilities.buildClassificationList(
-            req.body.classification_id
-        )
-        
-        return res.render("./inventory/add-inventory", {
-            title: "Add New Vehicle",
-            nav,
-            classificationList,
-            errors,
-            ...req.body,
-        })
-    }
-    
-    next()
-}
+    let classificationList = await utilities.buildClassificationList(
+      req.body.classification_id,
+    );
 
-module.exports = validate
+    return res.render("./inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      classificationList,
+      errors,
+      ...req.body,
+    });
+  }
 
+  next();
+};
+
+/* ******************************
+ * Week 5 - Learning
+ * Check data and return errors
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const { inv_id } = req.body;
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+
+    let classificationList = await utilities.buildClassificationList(
+      req.body.classification_id,
+    );
+
+    return res.render("./inventory/edit-inventory", {
+      title: "Edit " + req.body.inv_make + " " + req.body.inv_model,
+      nav,
+      classificationSelect: classificationList,
+      inv_id,
+      errors,
+      ...req.body,
+    });
+  }
+
+  next();
+};
+
+/* ******************************
+ * Week 5 - Learning
+ * Inventory update validation rules
+ * ***************************** */
+validate.newInventoryRules = () => {
+  return validate.inventoryRules();
+};
+
+module.exports = validate;

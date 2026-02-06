@@ -9,6 +9,11 @@ const loginValidate = require('../utilities/login-validation')
 // Route to Login View
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
+// Account Management View
+router.get("/", 
+utilities.checkLogin,  
+utilities.handleErrors(accountController.buildAccountManagement))
+
 // Route to Account Login View
 // router.post("/login", utilities.handleErrors(accountController.accountLogin))
 

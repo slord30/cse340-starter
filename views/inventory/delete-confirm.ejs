@@ -1,0 +1,57 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!--- FLASH MESSAGE -->
+<%- messages() %>
+
+<!--- SERVER-SIDE VALIDATION ERRORS -->
+<% if (errors && errors.array) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+
+<!-- INVENTORY FORM -->
+<p><strong>Confirm deletion - The delete is permanent.</strong></p>
+<div>
+  <form id="deleteInventory" method="post" action="/inv/delete-inventory">
+
+    <!-- Make -->
+    <label for="make">Make:</label>
+    <input type="text" id="make" name="inv_make" readonly
+      pattern="[A-Za-z\s]+"
+      value="<%= locals.inv_make %>">
+
+    <!-- Model -->
+    <label for="model">Model:</label>
+    <input type="text" id="model" name="inv_model" readonly
+      pattern="[A-Za-z\s]+"
+      value="<%= locals.inv_model %>">
+
+    <!-- Price -->
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="inv_price" readonly
+      min="0" step="0.01"
+      value="<%= locals.inv_price %>">
+
+    <!-- Year -->
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="inv_year" readonly
+      min="1900" max="2099"
+      value="<%= locals.inv_year %>">
+
+    <button type="submit">Delete</button>
+
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+  </form>
+</div>
+
