@@ -112,3 +112,16 @@ select#classificationList {
     padding: 1rem;
 }
 
+textarea#description {
+    padding: 1rem;
+}
+
+/********* UPDATE ACCOUNT **********/
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+legend {
+    font-size: 18px;
+}

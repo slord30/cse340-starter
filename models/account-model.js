@@ -26,7 +26,7 @@ async function checkExistingEmail(account_email){
 }
 
 /* *****************************
-* Unit 5 - Learrning
+* Unit 5 - Learning
   Return account data using email address
 * ***************************** */
 async function getAccountByEmail (account_email) {
@@ -40,4 +40,40 @@ async function getAccountByEmail (account_email) {
   }
 }
 
-module.exports= {registerAccount, checkExistingEmail, getAccountByEmail}
+/* *****************************
+* Unit 5 - Assignment Task 5
+  Get account by ID
+* ***************************** */
+async function getAccountById(account_id) {
+  const sql = "SELECT * FROM public.account WHERE account_id = $1"
+  const result = await pool.query(sql, [account_id])
+  return result.rows[0]  
+}
+
+// Update account info
+async function updateAccountInfo(account_id, firstname, lastname, email) {
+  const sql = `
+    UPDATE public.account
+    SET account_firstname = $1,
+        account_lastname = $2,
+        account_email = $3
+    WHERE account_id = $4
+    RETURNING *;
+  `
+  const result = await pool.query(sql, [firstname, lastname, email, account_id])
+  return result.rowCount > 0
+}
+
+async function updatePassword(account_id, hashedPassword) {
+  const sql = `
+    UPDATE public.account
+    SET account_password = $1
+    WHERE account_id = $2
+    RETURNING *;
+  `
+  const result = await pool.query(sql, [hashedPassword, account_id])
+  return result.rowCount > 0
+}
+
+
+module.exports= {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccountInfo, updatePassword}

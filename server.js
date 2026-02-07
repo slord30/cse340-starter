@@ -47,6 +47,13 @@ app.use(function(req, res, next){
   next()
 })
 
+// Account logged in
+app.use((req, res, next) => {
+  res.locals.loggedin = req.session.loggedin || false
+  res.locals.accountData = req.session.accountData || null
+  next()
+})
+
 /* ***********************
  * View Engine Templates
  *************************/

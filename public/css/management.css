@@ -14,11 +14,12 @@
 
 ul#management {
     margin-top: 2rem;
+    padding-left: 0;
 }
 
 #management li a {
     display: block;
-    padding: 4rem;
+    padding: 1rem;
     text-decoration: none;
     transition: transform 0.2s ease, background 0.2s ease;
 }
@@ -35,8 +36,37 @@ ul#management {
 
 #management li:hover {
     transform: scale(1.1);
+    background-color: var(--accent);
 }
 
 #management a:hover {
+    color: #fff;
+}
+
+h2#manage-inv {
+    margin-top: 4rem;
+}
+
+h2, h3 {
+    margin-top: 3rem;
+}
+
+ul.notice {
+    padding-left: 0;
+}
+
+ul.notice li {
+    list-style: none;
     color: var(--accent);
+}
+
+a.manage {
+    display: block;
+    padding: 1rem;
+    background-color: #8b8b8b;
+}
+
+a.manage:hover {
+    background-color: var(--accent);
+    color: #fff;
 }

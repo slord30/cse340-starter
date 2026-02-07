@@ -19,6 +19,7 @@ utilities.handleErrors(invController.buildInventoryDetail)
 // Route to build Inventory Management Page
 router.get(
     "/",
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.buildManagement)
 )
 
@@ -40,6 +41,7 @@ router.post(
 // Week 4 - Assignment 
 // Route to build Add New Vehicle view
 router.get("/add-inventory",
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.buildNewInventory)
 )
 
@@ -49,6 +51,7 @@ router.post(
     "/add-inventory",
     inventoryValidate.inventoryRules(),
     inventoryValidate.checkInventoryData,
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.addInventory)
 )
 
@@ -68,6 +71,7 @@ router.get("/getInventory/:classification_id",
 // Week 5 - Learning
 // Route to modifiy inventory
 router.get("/edit/:inv_id", 
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.buildEditInventory)
 )
 
@@ -76,18 +80,21 @@ router.get("/edit/:inv_id",
 router.post("/edit-inventory/",
     inventoryValidate.newInventoryRules(),
     inventoryValidate.checkUpdateData,
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.updateInventory)
 )
 
 // Week 5 - Team Activity
 // Route to delete inventory
 router.get("/delete/:inv_id",
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.buildDeleteInventory)
 )
 
 // Week 5 - Team Activity
 // Route to post the deleted inventory to the database
 router.post("/delete-inventory/",
+    utilities.checkEmployeeorAdmin,
     utilities.handleErrors(invController.deleteInventory)
 )
 

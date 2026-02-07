@@ -36,5 +36,31 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
+// Week 5 - Assignement Task 1
+// Route to logout
+router.get("/logout", 
+  utilities.handleErrors(accountController.accountLogout)
+)
+
+// Week 5 - Assignment Task 5
+// Route to account update view
+router.get("/update/:account_id",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildUpdateAccount)
+)
+
+// Route to post the updated account info
+router.post("/update",
+  regValidate.updateAccountRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccountInfo)
+)
+
+// Route to process password change
+router.post("/update-password",
+  regValidate.updatePasswordRules(),
+  regValidate.checkUpdatePassword,
+  utilities.handleErrors(accountController.updatePassword)
+)
 
 module.exports = router;
