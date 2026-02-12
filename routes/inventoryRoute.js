@@ -98,4 +98,19 @@ router.post("/delete-inventory/",
     utilities.handleErrors(invController.deleteInventory)
 )
 
+// Week 6 - Final Assignment
+// Route to confirm classification does not have inventory
+router.get(
+    "/delete-classification",
+    utilities.checkEmployeeorAdmin,
+    utilities.handleErrors(invController.buildDeleteClassification)
+)
+
+// Route to process classification deletion
+router.post(
+    "/delete-classification",
+    utilities.checkEmployeeorAdmin,
+    utilities.handleErrors(invController.deleteClassification)
+)
+
 module.exports = router;

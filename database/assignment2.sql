@@ -57,3 +57,8 @@ CREATE TABLE public.review (
 		ON DELETE CASCADE
 );
 
+ALTER TABLE inventory
+ADD CONSTRAINT inventory_classification_fk
+FOREIGN KEY (classification_id)
+REFERENCES classification(classification_id)
+ON DELETE RESTRICT;

@@ -24,3 +24,12 @@
 
 <script src="../../js/inventory.js"></script>
 
+<h2>Delete Classification</h2>
+<form method="get" action="/inv/delete-classification" id="deleteClass">
+  <label for="classification_id">Select a classification to delete:</label>
+
+  <%- classificationSelect %>
+
+  <button type="submit">Delete Selected Classification</button>
+</form>
+

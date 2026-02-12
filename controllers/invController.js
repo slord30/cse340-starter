@@ -333,4 +333,47 @@ invCont.deleteInventory = async function(req, res, next) {
   }
 }
 
+/* ***************************
+    Week 6 - Final Assignment
+ *  Build delete classification view
+ * ************************** */
+invCont.buildDeleteClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  const classification_id = parseInt(req.query.classification_id)
+
+  const invCount = await invModel.checkClassificationInventory(classification_id)
+
+  if (invCount > 0) {
+    req.flash("notice", "Cannot delete classification if it has inventory items.")
+    return res.redirect("/inv/")
+  }
+
+  res.render("./inventory/delete-classification", {
+    title: "Delete Classification",
+    nav,
+    classification_id,
+    errors: null
+  })
+}
+
+/* ***************************
+    Week 6 - Final Assignment
+ *  Process classification deletion
+ * ************************** */
+invCont.deleteClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  const {classification_id} = req.body
+
+  const deleteClassification = await invModel.deleteClassification(classification_id)
+
+  if (deleteClassification) {
+    req.flash("notice", "Classification successfully deleted.")
+    return res.redirect("/inv")
+  } else {
+    req.flash("notice", "Delete failed.")
+    return res.redirect("/inv")
+  }
+}
+
+
 module.exports = invCont

@@ -1,0 +1,27 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!--- FLASH MESSAGE -->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<p><strong>Confirm Delete</strong></p>
+<p>This action is permanent.</p>
+
+<form method="post" action="/inv/delete-classification" id="deleteClassConfirm">
+    <input type="hidden" name="classification_id" value="<%= classification_id %>">
+
+    <button type="submit">Delete Classification</button>
+    <a href="/inv/">Cancel</a>
+</form>

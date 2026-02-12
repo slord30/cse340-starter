@@ -144,3 +144,23 @@ form#reviewForm {
     justify-content: flex-start;
     min-height: 200px;
 }
+
+/*************** DELETE CLASSIFICATION ************/
+form#deleteClass {
+    min-height: 0;
+    margin: 0;
+}
+
+/************** DELETE CLASSIFICATION CONFIRM ***************/
+form#deleteClassConfirm {
+    min-height: 0;
+    margin: 0;
+}
+
+form#deleteClassConfirm a {
+    margin-top: 1rem;
+}
+
+form#deleteClassConfirm a:hover {
+    color: var(--accent);
+}

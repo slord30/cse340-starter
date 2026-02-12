@@ -166,6 +166,39 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* ***************************
+ *  Week 6 - Final Assignment
+ *  Check if classification has inventory
+ * ************************** */
+async function checkClassificationInventory(classification_id) {
+  try {
+    const sql = `
+      SELECT COUNT(*) FROM public.inventory WHERE classification_id = $1
+    `;
+    const result = await pool.query(sql, [classification_id])
+    return parseInt(result.rows[0].count)
+  } catch (error) {
+    console.log("checkClassificationUsage.error:", error)
+    return -1
+  }
+}
+
+/* ***************************
+ *  Week 6 - Final Assignment
+ *  Delete classification
+ * ************************** */
+async function deleteClassification(classification_id) {
+  try {
+    const sql = `
+      DELETE FROM public.classification WHERE classification_id = $1
+    `;
+    return await pool.query(sql, [classification_id])
+  } catch (error) {
+    console.error("deleteClassificationError:", error)
+    return null
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -173,5 +206,7 @@ module.exports = {
   addClassification,
   addInventory,
   updateInventory,
-  deleteInventory
+  deleteInventory,
+  checkClassificationInventory,
+  deleteClassification
 };
