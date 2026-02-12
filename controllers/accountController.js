@@ -1,5 +1,6 @@
 const utilities = require('../utilities')
 const accountModel = require('../models/account-model')
+const reviewModel = require('../models/review-model')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -141,10 +142,15 @@ async function accountLogin(req, res) {
  * ************************************ */
 async function buildAccountManagement(req, res, next) {
   const nav = await utilities.getNav()
+  const account_id = res.locals.accountData ? res.locals.accountData.account_id : null
+
+  const reviews = await reviewModel.getReviewsByAccountId(account_id)
+
   res.render("account/management", {
     title: "Account Management",
     nav,
-    accountData: req.session.accountData,
+    accountData: res.locals.accountData,
+    reviews,
     errors: null
   })
 }
@@ -191,7 +197,7 @@ async function buildUpdateAccount(req, res, next) {
     Process account info update
  * ************************************ */
 async function updateAccountInfo(req, res, next) {
-  const nav = await utilities.getNav()
+  let nav = await utilities.getNav()
   const {
     account_id,
     account_firstname,
@@ -199,6 +205,7 @@ async function updateAccountInfo(req, res, next) {
     account_email
   } = req.body
   
+  // Check if email exists for a DIFFERENT account
   const existingAccount = await accountModel.getAccountByEmail(account_email)
   if (existingAccount && existingAccount.account_id != account_id) {
     req.flash("notice", "Email already in use. Please choose another.")
@@ -206,7 +213,7 @@ async function updateAccountInfo(req, res, next) {
       title: "Update Account",
       nav,
       accountData: req.body,
-      errors: [{msg: "Email already exists"}]
+      errors: null
     })
   }
 
@@ -217,28 +224,35 @@ async function updateAccountInfo(req, res, next) {
     account_email
   )
 
+  // Fetch updated data and all reviews to rebuild the management view
+  const updatedData = await accountModel.getAccountById(account_id)
+  const reviews = await reviewModel.getReviewsByAccountId(account_id)
+
   if (result) {
+    // Update session so the "Welcome [Name]" stays current
+    req.session.accountData = updatedData
     req.flash("notice", "Account successfully updated.")
   } else {
     req.flash("notice", "Account update failed.")
   }
 
-  const updatedData = await accountModel.getAccountById(account_id)
   res.render("account/management", {
     title: "Account Management",
     nav,
     accountData: updatedData,
+    reviews, // Pass the array to the EJS loop
     errors: null
-    })
-  }
+  })
+}
+
 
 /* ****************************************
  *  Unit 5 - Assignement Task 5
     Process Password Change
  * ************************************ */
 async function updatePassword (req, res, next) {
-  const nav = await utilities.getNav()
-  const {account_id, account_password} = req.body
+  let nav = await utilities.getNav()
+  const { account_id, account_password } = req.body
 
   if (!account_password) {
     req.flash("notice", "Password cannot be empty.")
@@ -246,7 +260,7 @@ async function updatePassword (req, res, next) {
       title: "Update Account",
       nav,
       accountData: req.body,
-      errors: [{msg: "Password cannot be empty."}]
+      errors: null
     })
   }
 
@@ -254,17 +268,21 @@ async function updatePassword (req, res, next) {
     const hashedPassword = await bcrypt.hash(account_password, 10)
     const result = await accountModel.updatePassword(account_id, hashedPassword)
 
+    // Fetch updated data and reviews to rebuild the management view
+    const updatedData = await accountModel.getAccountById(account_id)
+    const reviews = await reviewModel.getReviewsByAccountId(account_id)
+
     if (result) {
       req.flash("notice", "Password successfully updated.")
     } else {
       req.flash("notice", "Password update failed.")
     }
 
-    const updatedData = await accountModel.getAccountById(account_id)
     res.render("account/management", {
       title: "Account Management",
       nav,
       accountData: updatedData,
+      reviews, // Pass the array to the EJS loop
       errors: null
     })
   } catch (error) {

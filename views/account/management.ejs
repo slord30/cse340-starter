@@ -28,3 +28,29 @@
     <a href="/inv/" class="manage">Access Inventory Management</a>
   </p>
 <% } %>
+
+<h2>Your Reviews</h2>
+<% if (reviews && reviews.length > 0) { %>
+  <div class="reviews-container">
+    <% reviews.forEach(review => { %>
+      <div class="review-card">
+        <div class="review-header">
+          <strong><%= review.inv_year %> <%= review.inv_make %> <%= review.inv_model %></strong>
+          <%= new Date(review.review_date).toLocaleDateString() %>
+        </div>
+        <p class="review-text"><%= review.review_text %></p>
+        
+        <div class="review-actions">
+          <a href="/review/edit/<%= review.review_id %>" class="action-link edit">Edit</a>
+          
+          <form action="/review/delete" method="post" class="inline-form">
+            <input type="hidden" name="review_id" value="<%= review.review_id %>">
+            <button type="submit" class="action-link delete">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p>You have not written any reviews yet.</p>
+<% } %>

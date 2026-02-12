@@ -125,3 +125,22 @@ fieldset {
 legend {
     font-size: 18px;
 }
+
+/*********** EDIT REVIEW ***********/
+textarea#reviewText {
+    padding: .5rem;
+}
+
+a.btn-cancel {
+    margin-top: 1rem;
+}  
+
+/************ SUBMIT REVIEW ************/
+textarea#reviewText {
+    padding: .5rem;
+}
+
+form#reviewForm {
+    justify-content: flex-start;
+    min-height: 200px;
+}

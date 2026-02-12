@@ -12,3 +12,30 @@
 <!-- The Inventory Details for each Vehicle Display -->
 <!-- Displays the single page (containing HTML) and logic we did previously in M-V-C -->
 <%- details %>
+
+<!-- Review Form (logged-in users only) -->
+ <% if (locals.loggedin) { %>
+  <h3>Leave a review</h3>
+  <form action="/review/add" method="post" id="reviewForm">
+    <textarea name = "review_text" id="reviewText" rows="4"></textarea>
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <button type="submit">Submit Review</button>
+  </form>
+  <% } else { %>
+    <p><a href="/account/login">Log in</a></p>
+  <% } %>
+
+<!-- Display Reviews -->
+<h3>Customer Reviews</h3>
+
+<% if (reviews && reviews.length > 0) { %>
+  <% reviews.forEach(review => { %>
+    <div class="review">
+      <p><strong><%= review.account_firstname %>:</strong></p>
+      <p><%= review.review_text %></p>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>No reviews yet.</p>
+<% } %>
+

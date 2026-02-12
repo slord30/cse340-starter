@@ -70,3 +70,62 @@ a.manage:hover {
     background-color: var(--accent);
     color: #fff;
 }
+
+/************ Reviews Section **************/
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-date {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.review-actions {
+  margin-top: 1rem;
+}
+
+.action-link {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.edit { 
+    color: #8b8b8b;
+    font-size: 16px;
+ }
+
+.delete { 
+  color: var(--accent); 
+  background: none; 
+  border: none; 
+  cursor: pointer;
+  padding: .25rem;
+  font-size: 16px;
+}
+
+.edit:hover {
+    color: var(--accent);
+}
+
+.inline-form { display: inline; }

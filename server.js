@@ -71,6 +71,8 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
+app.use("/review", require("./routes/reviewRoute"))
+
 
 /* ***********************
  *File Not Found Route
