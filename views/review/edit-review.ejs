@@ -1,0 +1,34 @@
+<% if (title) { %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
+
+<!--- FLASH MESSAGE ---->
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div class="edit-review-container">
+  <form action="/review/update" method="post" id="updateReview">
+    <fieldset>
+      <legend>Modify Your Review</legend>
+      <p><strong>Reviewing:</strong> <%= reviewData.inv_year %> <%= reviewData.inv_make %> <%= reviewData.inv_model %></p>
+      <p><strong>Original Date:</strong> <%= new Date(reviewData.review_date).toLocaleDateString() %></p>
+
+      <label for="reviewText">Review Text: </label>
+      <textarea name="review_text" id="reviewText" rows="6 required"><%= reviewData.review_text %></textarea>
+
+      <input type="hidden" name="review_id" value="<%= reviewData.review_id %>">
+
+      <button type="submit" class="btn-update">Update Review</button>
+      <a href="/account" class="btn-cancel">Cancel</a>
+    </fieldset>
+  </form>
+</div>
